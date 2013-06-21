@@ -14,8 +14,12 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    xpathviewer.cpp \
+    xmlsyntaxhighlighter.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    xpathviewer.h \
+    xmlsyntaxhighlighter.h
 
 FORMS    += mainwindow.ui

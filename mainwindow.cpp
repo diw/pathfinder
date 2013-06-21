@@ -12,3 +12,18 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_actionOpen_triggered()
+{
+    // open up a file and launch a tab for it
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    // prompt to quit
+}
+
+void MainWindow::on_actionPreferences_triggered()
+{
+    // show a preferences dialog
+}
