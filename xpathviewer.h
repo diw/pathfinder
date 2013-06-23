@@ -4,12 +4,15 @@
 #include <QWidget>
 #include <QLineEdit>
 #include <QTextEdit>
+#include <QtXmlPatterns/QXmlQuery>
+#include <QTextStream>
+#include <QVBoxLayout>
 
 class XPathViewer : public QWidget
 {
     Q_OBJECT
 public:
-    explicit XPathViewer(QWidget *parent = 0);
+    explicit XPathViewer(QTextStream & input, QWidget *parent = 0);
     virtual ~XPathViewer();
     
 signals:
@@ -17,9 +20,12 @@ signals:
 public slots:
 
 private:
-    QLineEdit* txtXpath;
+    QLineEdit* txtXPath;
     QTextEdit* txtXDoc;
-    
+    QVBoxLayout* mainLayout;
+
+    QXmlQuery xmlDoc;
+
 };
 
 #endif // XPATHVIEWER_H

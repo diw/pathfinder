@@ -1,11 +1,19 @@
 #include "xpathviewer.h"
 
-XPathViewer::XPathViewer(QWidget *parent) :
+XPathViewer::XPathViewer(QTextStream & input, QWidget* parent) :
     QWidget(parent)
 {
+    mainLayout = new QVBoxLayout();
+    txtXDoc = new QTextEdit();
+    txtXPath = new QLineEdit();
+    mainLayout->addWidget(txtXPath);
+    mainLayout->addWidget(txtXDoc);
+    setLayout(mainLayout);
+    txtXDoc->setText(input.readAll());
 }
 
 XPathViewer::~XPathViewer() {
     delete txtXDoc;
-    delete txtXpath;
+    delete txtXPath;
+    delete mainLayout;
 }
