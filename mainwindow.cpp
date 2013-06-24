@@ -33,7 +33,13 @@ void MainWindow::on_actionOpen_triggered()
         } else {
             QTextStream in(&file);
             XPathViewer* viewer = new XPathViewer(in, 0);
-            ui->tabOpenDocs->addTab(viewer, fileName);
+            // get the file name
+            QFileInfo fileInfo(file.fileName());
+            QString simpleName(fileInfo.fileName());
+            int index = ui->tabOpenDocs->addTab(viewer, simpleName);
+            ui->tabOpenDocs->setCurrentIndex(index);
+            ui->tabOpenDocs->setVisible(true);
+            ui->lblPrompt->setVisible(false);
             file.close();
         }
     }

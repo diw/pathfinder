@@ -18,13 +18,13 @@ public:
 signals:
     
 public slots:
-
+    void highlightQueryResults(QString const& text);
 private:
     QLineEdit* txtXPath;
     QTextEdit* txtXDoc;
     QVBoxLayout* mainLayout;
 
-    QXmlQuery xmlDoc;
+    QXmlQuery query;
 
 };
 
