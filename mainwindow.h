@@ -22,6 +22,8 @@ private slots:
 
     void on_actionPreferences_triggered();
 
+    void on_tabOpenDocs_tabCloseRequested(int index);
+
 private:
     Ui::MainWindow *ui;
 };

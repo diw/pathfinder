@@ -54,3 +54,10 @@ void MainWindow::on_actionPreferences_triggered()
 {
     // show a preferences dialog
 }
+
+void MainWindow::on_tabOpenDocs_tabCloseRequested(int index)
+{
+    QWidget* closingTab = ui->tabOpenDocs->widget(index);
+    ui->tabOpenDocs->removeTab(index);
+    delete closingTab;
+}
