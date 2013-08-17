@@ -6,14 +6,23 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += widgets
 
 QT += xmlpatterns
 
 TARGET = pathfinder
 TEMPLATE = app
 
+LIBS += -stdlib=libc++
+
+QMAKE_CXXFLAGS += -stdlib=libc++
 QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -mmacosx-version-min=10.7
+QMAKE_LFLAGS += -mmacosx-version-min=10.7
+
+
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7 #2
+
 
 SOURCES += main.cpp\
         mainwindow.cpp \
