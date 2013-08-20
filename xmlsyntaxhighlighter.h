@@ -19,8 +19,17 @@ private:
         QTextCharFormat format;
     };
 
-    QVector<HighlightingRule> highlightingRules;
+    int const IN_COMMENT = 1;
 
+    QList<HighlightingRule> highlightingRules;
+
+    QTextCharFormat commentFormat;
+    QTextCharFormat attributeFormat;
+    QTextCharFormat valueFormat;
+    QTextCharFormat elementFormat;
+
+    QRegExp commentStart;
+    QRegExp commentEnd;
 };
 
 #endif // XMLSYNTAXHIGHLIGHTER_H

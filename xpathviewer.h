@@ -8,6 +8,8 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 
+#include "xmlsyntaxhighlighter.h"
+
 class XPathViewer : public QWidget
 {
     Q_OBJECT
@@ -23,6 +25,7 @@ private:
     QLineEdit* txtXPath;
     QTextEdit* txtXDoc;
     QVBoxLayout* mainLayout;
+    XmlSyntaxHighlighter* highlighter;
 
     QXmlQuery query;
 
