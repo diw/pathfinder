@@ -25,10 +25,13 @@ macx {
 SOURCES += main.cpp\
         mainwindow.cpp \
     xpathviewer.cpp \
-    xmlsyntaxhighlighter.cpp
+    xmlsyntaxhighlighter.cpp \
+    preferencesdialog.cpp
 
 HEADERS  += mainwindow.h \
     xpathviewer.h \
-    xmlsyntaxhighlighter.h
+    xmlsyntaxhighlighter.h \
+    preferencesdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    preferencesdialog.ui
