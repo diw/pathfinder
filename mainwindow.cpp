@@ -6,7 +6,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    tabCount(0)
 {
     ui->setupUi(this);
     int initialTabCount = ui->tabOpenDocs->count();
@@ -41,6 +42,7 @@ void MainWindow::on_actionOpen_triggered()
             ui->tabOpenDocs->setVisible(true);
             ui->lblPrompt->setVisible(false);
             file.close();
+            ++tabCount;
         }
     }
 }
@@ -60,4 +62,9 @@ void MainWindow::on_tabOpenDocs_tabCloseRequested(int index)
     QWidget* closingTab = ui->tabOpenDocs->widget(index);
     ui->tabOpenDocs->removeTab(index);
     delete closingTab;
+    --tabCount;
+    if (tabCount == 0) {
+        ui->tabOpenDocs->setVisible(false);
+        ui->lblPrompt->setVisible(true);
+    }
 }

@@ -26,6 +26,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    int tabCount;
 };
 
 #endif // MAINWINDOW_H
