@@ -21,6 +21,7 @@ signals:
     
 public slots:
     void highlightQueryResults(QString const& text);
+    void updateSyntaxHighlighterColours();
 private:
     QLineEdit* txtXPath;
     QTextEdit* txtXDoc;

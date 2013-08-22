@@ -68,3 +68,13 @@ void MainWindow::on_tabOpenDocs_tabCloseRequested(int index)
         ui->lblPrompt->setVisible(true);
     }
 }
+
+void MainWindow::readSettings()
+{
+
+}
+
+void MainWindow::writeSettings()
+{
+
+}

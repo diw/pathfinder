@@ -27,3 +27,8 @@ XPathViewer::~XPathViewer() {
 void XPathViewer::highlightQueryResults(QString const& text) {
     query.setQuery(txtXPath->text());
 }
+
+void XPathViewer::updateSyntaxHighlighterColours()
+{
+
+}

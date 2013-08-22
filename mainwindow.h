@@ -28,6 +28,9 @@ private:
     Ui::MainWindow *ui;
 
     int tabCount;
+
+    void writeSettings();
+    void readSettings();
 };
 
 #endif // MAINWINDOW_H
