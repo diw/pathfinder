@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "xpathviewer.h"
+#include "preferencesdialog.h"
 #include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -54,7 +55,8 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionPreferences_triggered()
 {
-    // show a preferences dialog
+    PreferencesDialog prefs;
+    prefs.exec();
 }
 
 void MainWindow::on_tabOpenDocs_tabCloseRequested(int index)
