@@ -2,7 +2,6 @@
 #define PREFERENCESDIALOG_H
 
 #include <QDialog>
-#include <QSettings>
 
 namespace Ui {
 class PreferencesDialog;
@@ -18,7 +17,14 @@ public:
     
 private:
     Ui::PreferencesDialog *ui;
-    std::unique_ptr<QSettings> settings;
+    QColor bracketsColour;
+    QColor elementsColour;
+    QColor attributesColour;
+    QColor valuesColour;
+
+    void commitColours();
+    void loadColours();
+    void recolourButtons();
 };
 
 #endif // PREFERENCESDIALOG_H
