@@ -2,13 +2,17 @@
 #define XMLSYNTAXHIGHLIGHTER_H
 
 #include <QSyntaxHighlighter>
+#include <memory>
+
+#include "highlightingcolours.h"
 
 class XmlSyntaxHighlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
 
 public:
-    XmlSyntaxHighlighter(QTextDocument* parent = 0);
+    XmlSyntaxHighlighter(HighlightingColours colours, QTextDocument* parent = 0);
+    static std::unique_ptr<XmlSyntaxHighlighter> getDefaultHighlighter(HighlightingColours const& colours);
 
 protected:
     void highlightBlock(QString const& text);
@@ -30,6 +34,8 @@ private:
 
     QRegExp commentStart;
     QRegExp commentEnd;
+
+    HighlightingColours colours;
 };
 
 #endif // XMLSYNTAXHIGHLIGHTER_H

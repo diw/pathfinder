@@ -26,12 +26,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     xpathviewer.cpp \
     xmlsyntaxhighlighter.cpp \
-    preferencesdialog.cpp
+    preferencesdialog.cpp \
+    highlightingcolours.cpp
 
 HEADERS  += mainwindow.h \
     xpathviewer.h \
     xmlsyntaxhighlighter.h \
-    preferencesdialog.h
+    preferencesdialog.h \
+    highlightingcolours.h
 
 FORMS    += mainwindow.ui \
     preferencesdialog.ui

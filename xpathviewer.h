@@ -14,7 +14,7 @@ class XPathViewer : public QWidget
 {
     Q_OBJECT
 public:
-    explicit XPathViewer(QTextStream & input, QWidget *parent = 0);
+    explicit XPathViewer(QTextStream & input, XmlSyntaxHighlighter* highlighter, QWidget *parent = 0);
     virtual ~XPathViewer();
     
 signals:

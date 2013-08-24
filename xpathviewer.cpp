@@ -1,7 +1,8 @@
 #include "xpathviewer.h"
 
-XPathViewer::XPathViewer(QTextStream & input, QWidget* parent) :
-    QWidget(parent)
+XPathViewer::XPathViewer(QTextStream & input, XmlSyntaxHighlighter* highlighter, QWidget* parent) :
+    QWidget(parent),
+    highlighter(highlighter)
 {
     mainLayout = new QVBoxLayout();
     txtXDoc = new QTextEdit();
@@ -14,7 +15,7 @@ XPathViewer::XPathViewer(QTextStream & input, QWidget* parent) :
 
     txtXDoc->setReadOnly(true);
     query.setFocus(txtXDoc->toPlainText());
-    highlighter = new XmlSyntaxHighlighter(txtXDoc->document());
+    highlighter->setDocument(txtXDoc->document());
     connect(txtXPath, SIGNAL(textEdited(QString)), this, SLOT(highlightQueryResults(QString)));
 }
 

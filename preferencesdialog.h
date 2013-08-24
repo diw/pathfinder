@@ -4,15 +4,7 @@
 #include <QDialog>
 #include <QSignalMapper>
 
-struct HighlightingColours {
-    QColor bracketsColour;
-    QColor elementsColour;
-    QColor attributesColour;
-    QColor valuesColour;
-};
-
-HighlightingColours loadColours();
-void commitColours(HighlightingColours const& colours);
+#include "xmlsyntaxhighlighter.h"
 
 namespace Ui {
 class PreferencesDialog;
@@ -36,6 +28,7 @@ private:
 
     Ui::PreferencesDialog *ui;
     HighlightingColours colours;
+    std::unique_ptr<XmlSyntaxHighlighter> highlighter;
 
     void recolourButtons();
 

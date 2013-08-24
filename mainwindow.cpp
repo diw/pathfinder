@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->tabOpenDocs->removeTab(0);
     }
     ui->tabOpenDocs->setVisible(false);
+    auto colours = loadColours();
+    highlighter = XmlSyntaxHighlighter::getDefaultHighlighter(colours);
 }
 
 MainWindow::~MainWindow()
@@ -34,7 +36,7 @@ void MainWindow::on_actionOpen_triggered()
             return;
         } else {
             QTextStream in(&file);
-            XPathViewer* viewer = new XPathViewer(in, 0);
+            XPathViewer* viewer = new XPathViewer(in, highlighter.get(), 0);
             // get the file name
             QFileInfo fileInfo(file.fileName());
             QString simpleName(fileInfo.fileName());
@@ -71,12 +73,9 @@ void MainWindow::on_tabOpenDocs_tabCloseRequested(int index)
     }
 }
 
-void MainWindow::readSettings()
+void MainWindow::updateDefaultHighlighter()
 {
-
-}
-
-void MainWindow::writeSettings()
-{
-
+    auto currentHighlighter = highlighter.release();
+    delete currentHighlighter;
+    highlighter = XmlSyntaxHighlighter::getDefaultHighlighter(loadColours());
 }

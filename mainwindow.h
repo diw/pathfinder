@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <memory>
+
+#include "xmlsyntaxhighlighter.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,13 +27,14 @@ private slots:
 
     void on_tabOpenDocs_tabCloseRequested(int index);
 
+    void updateDefaultHighlighter();
+
 private:
     Ui::MainWindow *ui;
 
     int tabCount;
 
-    void writeSettings();
-    void readSettings();
+    std::unique_ptr<XmlSyntaxHighlighter> highlighter;
 };
 
 #endif // MAINWINDOW_H
