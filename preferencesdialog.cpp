@@ -84,10 +84,11 @@ void PreferencesDialog::openColourPickerDialog(Buttons sender)
 void PreferencesDialog::accept()
 {
     commitColours();
+    done(QDialog::Accepted);
 }
 
 void PreferencesDialog::reject()
 {
-    // pass
+    done(QDialog::Rejected);
 }
 
