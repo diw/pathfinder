@@ -55,9 +55,13 @@ void PreferencesDialog::loadColours()
 void PreferencesDialog::recolourButtons()
 {
     ui->btnBrackets->setStyleSheet(QString{"background-color: %1"}.arg(bracketsColour.name()));
+    ui->btnBrackets->setText(bracketsColour.name());
     ui->btnAttributes->setStyleSheet(QString{"background-color: %1"}.arg(attributesColour.name()));
+    ui->btnAttributes->setText(attributesColour.name());
     ui->btnElements->setStyleSheet(QString{"background-color: %1"}.arg(elementsColour.name()));
+    ui->btnElements->setText(elementsColour.name());
     ui->btnValues->setStyleSheet(QString{"background-color: %1"}.arg(valuesColour.name()));
+    ui->btnValues->setText(valuesColour.name());
 }
 
 void PreferencesDialog::openColourPickerDialog(Buttons sender)
