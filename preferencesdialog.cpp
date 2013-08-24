@@ -2,6 +2,9 @@
 #include "ui_preferencesdialog.h"
 
 #include <QSettings>
+#include <QColorDialog>
+
+#include <functional>
 
 PreferencesDialog::PreferencesDialog(QWidget *parent) :
     QDialog(parent),
@@ -12,6 +15,14 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
 
     loadColours();
     recolourButtons();
+
+    // set up the signal mapping, since we are connecting each button to the same slot
+    // we'll cheat and use std::bind instead of setting up a signal mapper
+    connect(ui->btnAttributes, &QPushButton::clicked, std::bind(&PreferencesDialog::openColourPickerDialog, this, Buttons::ATTRIBUTES));
+    connect(ui->btnValues, &QPushButton::clicked, std::bind(&PreferencesDialog::openColourPickerDialog, this, Buttons::VALUES));
+    connect(ui->btnBrackets, &QPushButton::clicked, std::bind(&PreferencesDialog::openColourPickerDialog, this, Buttons::BRACKETS));
+    connect(ui->btnElements, &QPushButton::clicked, std::bind(&PreferencesDialog::openColourPickerDialog, this, Buttons::ELEMENTS));
+
 }
 
 PreferencesDialog::~PreferencesDialog()
@@ -28,7 +39,6 @@ void PreferencesDialog::commitColours()
     settings.setValue("attributes", attributesColour);
     settings.setValue("values", valuesColour);
     settings.endGroup();
-
 }
 
 void PreferencesDialog::loadColours()
@@ -49,3 +59,35 @@ void PreferencesDialog::recolourButtons()
     ui->btnElements->setStyleSheet(QString{"background-color: %1"}.arg(elementsColour.name()));
     ui->btnValues->setStyleSheet(QString{"background-color: %1"}.arg(valuesColour.name()));
 }
+
+void PreferencesDialog::openColourPickerDialog(Buttons sender)
+{
+    QColor* initialColour;
+    switch (sender) {
+        case Buttons::ATTRIBUTES:
+            initialColour = &attributesColour;
+        case Buttons::VALUES:
+            initialColour = &valuesColour;
+        case Buttons::ELEMENTS:
+            initialColour = &elementsColour;
+        case Buttons::BRACKETS:
+            initialColour = &bracketsColour;
+    }
+
+    auto colour = QColorDialog::getColor(*initialColour, this, "Pick a Colour");
+    if (colour.isValid()) {
+        *initialColour = colour;
+    }
+    recolourButtons();
+}
+
+void PreferencesDialog::accept()
+{
+    commitColours();
+}
+
+void PreferencesDialog::reject()
+{
+    // pass
+}
+

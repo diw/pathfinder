@@ -2,6 +2,7 @@
 #define PREFERENCESDIALOG_H
 
 #include <QDialog>
+#include <QSignalMapper>
 
 namespace Ui {
 class PreferencesDialog;
@@ -16,6 +17,13 @@ public:
     ~PreferencesDialog();
     
 private:
+    enum Buttons {
+        BRACKETS,
+        ATTRIBUTES,
+        VALUES,
+        ELEMENTS
+    };
+
     Ui::PreferencesDialog *ui;
     QColor bracketsColour;
     QColor elementsColour;
@@ -25,6 +33,11 @@ private:
     void commitColours();
     void loadColours();
     void recolourButtons();
+
+private slots:
+    void openColourPickerDialog(Buttons sender);
+    void accept() override;
+    void reject() override;
 };
 
 #endif // PREFERENCESDIALOG_H
