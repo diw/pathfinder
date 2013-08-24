@@ -16,12 +16,12 @@ class XPathViewer : public QWidget
 public:
     explicit XPathViewer(QTextStream & input, XmlSyntaxHighlighter* highlighter, QWidget *parent = 0);
     virtual ~XPathViewer();
-    
+    void takeHighlighterFocus();
+    void takeNewHighlighter(XmlSyntaxHighlighter* newHighlighter);
 signals:
     
 public slots:
     void highlightQueryResults(QString const& text);
-    void updateSyntaxHighlighterColours();
 private:
     QLineEdit* txtXPath;
     QTextEdit* txtXDoc;

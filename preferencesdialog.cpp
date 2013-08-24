@@ -51,12 +51,16 @@ void PreferencesDialog::openColourPickerDialog(Buttons sender)
     switch (sender) {
         case Buttons::ATTRIBUTES:
             initialColour = &colours.attributesColour;
+            break;
         case Buttons::VALUES:
             initialColour = &colours.valuesColour;
+            break;
         case Buttons::ELEMENTS:
             initialColour = &colours.elementsColour;
+            break;
         case Buttons::BRACKETS:
             initialColour = &colours.bracketsColour;
+            break;
     }
 
     auto colour = QColorDialog::getColor(*initialColour, this, "Pick a Colour");

@@ -29,6 +29,8 @@ private slots:
 
     void updateDefaultHighlighter();
 
+    void on_tabOpenDocs_currentChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 

@@ -58,7 +58,10 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionPreferences_triggered()
 {
     PreferencesDialog prefs;
-    prefs.exec();
+    auto result = prefs.exec();
+    if (result == QDialog::Accepted) {
+        updateDefaultHighlighter();
+    }
 }
 
 void MainWindow::on_tabOpenDocs_tabCloseRequested(int index)
@@ -78,4 +81,13 @@ void MainWindow::updateDefaultHighlighter()
     auto currentHighlighter = highlighter.release();
     delete currentHighlighter;
     highlighter = XmlSyntaxHighlighter::getDefaultHighlighter(loadColours());
+    on_tabOpenDocs_currentChanged(0);
+}
+
+void MainWindow::on_tabOpenDocs_currentChanged(int index)
+{
+    auto currentTab = dynamic_cast<XPathViewer*>(ui->tabOpenDocs->currentWidget());
+    if (currentTab) {
+        currentTab->takeNewHighlighter(highlighter.get());
+    }
 }

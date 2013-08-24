@@ -29,7 +29,13 @@ void XPathViewer::highlightQueryResults(QString const& text) {
     query.setQuery(txtXPath->text());
 }
 
-void XPathViewer::updateSyntaxHighlighterColours()
+void XPathViewer::takeHighlighterFocus()
 {
+    highlighter->setDocument(txtXDoc->document());
+}
 
+void XPathViewer::takeNewHighlighter(XmlSyntaxHighlighter* newHighlighter)
+{
+    highlighter = newHighlighter;
+    takeHighlighterFocus();
 }
