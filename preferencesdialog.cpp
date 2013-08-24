@@ -6,6 +6,33 @@
 
 #include <functional>
 
+
+HighlightingColours loadColours()
+{
+    HighlightingColours colours;
+
+    QSettings settings;
+    settings.beginGroup("colours");
+    colours.bracketsColour = settings.value("brackets", QColor(Qt::darkMagenta)).value<QColor>();
+    colours.elementsColour = settings.value("elements", QColor(Qt::green)).value<QColor>();
+    colours.attributesColour = settings.value("attributes", QColor(Qt::blue)).value<QColor>();
+    colours.valuesColour = settings.value("values", QColor(Qt::darkMagenta)).value<QColor>();
+    settings.endGroup();
+
+    return colours;
+}
+
+void commitColours(HighlightingColours const& colours)
+{
+    QSettings settings;
+    settings.beginGroup("colours");
+    settings.setValue("brackets", colours.bracketsColour);
+    settings.setValue("elements", colours.elementsColour);
+    settings.setValue("attributes", colours.attributesColour);
+    settings.setValue("values", colours.valuesColour);
+    settings.endGroup();
+}
+
 PreferencesDialog::PreferencesDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PreferencesDialog)
@@ -13,7 +40,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Colour Preferences");
 
-    loadColours();
+    colours = loadColours();
     recolourButtons();
 
     // set up the signal mapping, since we are connecting each button to the same slot
@@ -30,38 +57,16 @@ PreferencesDialog::~PreferencesDialog()
     delete ui;
 }
 
-void PreferencesDialog::commitColours()
-{
-    QSettings settings;
-    settings.beginGroup("colours");
-    settings.setValue("brackets", bracketsColour);
-    settings.setValue("elements", elementsColour);
-    settings.setValue("attributes", attributesColour);
-    settings.setValue("values", valuesColour);
-    settings.endGroup();
-}
-
-void PreferencesDialog::loadColours()
-{
-    QSettings settings;
-    settings.beginGroup("colours");
-    bracketsColour = settings.value("brackets", QColor(Qt::darkMagenta)).value<QColor>();
-    elementsColour = settings.value("elements", QColor(Qt::green)).value<QColor>();
-    attributesColour = settings.value("attributes", QColor(Qt::blue)).value<QColor>();
-    valuesColour = settings.value("values", QColor(Qt::darkMagenta)).value<QColor>();
-    settings.endGroup();
-}
-
 void PreferencesDialog::recolourButtons()
 {
-    ui->btnBrackets->setStyleSheet(QString{"background-color: %1"}.arg(bracketsColour.name()));
-    ui->btnBrackets->setText(bracketsColour.name());
-    ui->btnAttributes->setStyleSheet(QString{"background-color: %1"}.arg(attributesColour.name()));
-    ui->btnAttributes->setText(attributesColour.name());
-    ui->btnElements->setStyleSheet(QString{"background-color: %1"}.arg(elementsColour.name()));
-    ui->btnElements->setText(elementsColour.name());
-    ui->btnValues->setStyleSheet(QString{"background-color: %1"}.arg(valuesColour.name()));
-    ui->btnValues->setText(valuesColour.name());
+    ui->btnBrackets->setStyleSheet(QString{"background-color: %1"}.arg(colours.bracketsColour.name()));
+    ui->btnBrackets->setText(colours.bracketsColour.name());
+    ui->btnAttributes->setStyleSheet(QString{"background-color: %1"}.arg(colours.attributesColour.name()));
+    ui->btnAttributes->setText(colours.attributesColour.name());
+    ui->btnElements->setStyleSheet(QString{"background-color: %1"}.arg(colours.elementsColour.name()));
+    ui->btnElements->setText(colours.elementsColour.name());
+    ui->btnValues->setStyleSheet(QString{"background-color: %1"}.arg(colours.valuesColour.name()));
+    ui->btnValues->setText(colours.valuesColour.name());
 }
 
 void PreferencesDialog::openColourPickerDialog(Buttons sender)
@@ -69,13 +74,13 @@ void PreferencesDialog::openColourPickerDialog(Buttons sender)
     QColor* initialColour;
     switch (sender) {
         case Buttons::ATTRIBUTES:
-            initialColour = &attributesColour;
+            initialColour = &colours.attributesColour;
         case Buttons::VALUES:
-            initialColour = &valuesColour;
+            initialColour = &colours.valuesColour;
         case Buttons::ELEMENTS:
-            initialColour = &elementsColour;
+            initialColour = &colours.elementsColour;
         case Buttons::BRACKETS:
-            initialColour = &bracketsColour;
+            initialColour = &colours.bracketsColour;
     }
 
     auto colour = QColorDialog::getColor(*initialColour, this, "Pick a Colour");
@@ -87,7 +92,7 @@ void PreferencesDialog::openColourPickerDialog(Buttons sender)
 
 void PreferencesDialog::accept()
 {
-    commitColours();
+    commitColours(colours);
     done(QDialog::Accepted);
 }
 

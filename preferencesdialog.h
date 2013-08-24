@@ -4,6 +4,16 @@
 #include <QDialog>
 #include <QSignalMapper>
 
+struct HighlightingColours {
+    QColor bracketsColour;
+    QColor elementsColour;
+    QColor attributesColour;
+    QColor valuesColour;
+};
+
+HighlightingColours loadColours();
+void commitColours(HighlightingColours const& colours);
+
 namespace Ui {
 class PreferencesDialog;
 }
@@ -25,13 +35,8 @@ private:
     };
 
     Ui::PreferencesDialog *ui;
-    QColor bracketsColour;
-    QColor elementsColour;
-    QColor attributesColour;
-    QColor valuesColour;
+    HighlightingColours colours;
 
-    void commitColours();
-    void loadColours();
     void recolourButtons();
 
 private slots:
